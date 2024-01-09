@@ -42,7 +42,6 @@ class SplitBillCalculator:
 
     def main(self):
         num_friends = self.get_number_of_friends()
-
         if num_friends > 0:
             self.get_friend_names(num_friends)
             total_bill = self.get_total_bill()
