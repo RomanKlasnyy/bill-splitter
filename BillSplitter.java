@@ -3,7 +3,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Random;
 
-public class SplitBill {
+public class BillSplitter {
     public static void main(String[] args) {
         Map<String, Double> friends = new HashMap<>();
         boolean luckyFeature = false;
