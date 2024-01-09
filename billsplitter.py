@@ -1,40 +1,58 @@
 import random
 
-friends = {}
-lucky_feature = False
-lucky = None
 
-print('Enter the number of friends joining (including you):')
-num = int(input())
-print()
+class SplitBillCalculator:
+    def __init__(self):
+        self.friends = {}
+        self.lucky_feature = False
+        self.lucky = None
 
-if num > 0:
-    print('Enter the name of every friend (including you), each on a new line:')
-    for _ in range(num):
-        friend = input()
-        friends[friend] = 0
-    print()
-    print('Enter the total bill value:')
-    bill = int(input())
-    print()
-    print('Do you want to use the "Who is lucky?" feature? Write Yes/No:')
-    answer = input()
-    if answer.lower() == 'yes':
-        print()
-        lucky = random.choice(list(friends.keys()))
-        print(f'{lucky} is the lucky one!')
-        lucky_feature = True
-    else:
-        print()
-        print('No one is going to be lucky')
-    if lucky_feature:
-        price = round(bill / (len(friends)-1), 2)
-    else:
-        price = round(bill / len(friends), 2)
-    print()
-    for x, y in friends.items():
-        if x != lucky:
-            friends[x] = y+price
-    print(friends)
-else:
-    print('No one is joining for the party')
+    def get_number_of_friends(self):
+        return int(input('Enter the number of friends joining (including you):\n'))
+
+    def get_friend_names(self, num_friends):
+        print('Enter the name of every friend (including you), each on a new line:')
+        for _ in range(num_friends):
+            friend = input()
+            self.friends[friend] = 0
+
+    def get_total_bill(self):
+        return int(input('Enter the total bill value:\n'))
+
+    def use_lucky_feature(self):
+        answer = input('Do you want to use the "Who is lucky?" feature? Write Yes/No:\n')
+        if answer.lower() == 'yes':
+            self.lucky = random.choice(list(self.friends.keys()))
+            print(f'{self.lucky} is the lucky one!')
+            self.lucky_feature = True
+        else:
+            print('No one is going to be lucky')
+
+    def calculate_and_print_split_bill(self, bill):
+        if self.lucky_feature:
+            price = round(bill / (len(self.friends) - 1), 2)
+        else:
+            price = round(bill / len(self.friends), 2)
+
+        for friend in self.friends:
+            if friend != self.lucky:
+                self.friends[friend] += price
+
+        print(self.friends)
+
+    def main(self):
+        num_friends = self.get_number_of_friends()
+
+        if num_friends > 0:
+            self.get_friend_names(num_friends)
+            total_bill = self.get_total_bill()
+            self.use_lucky_feature()
+            self.calculate_and_print_split_bill(total_bill)
+        else:
+            print('No one is joining for the party')
+
+
+if __name__ == "__main__":
+    split_bill_calculator = SplitBillCalculator()
+    split_bill_calculator.main()
+
