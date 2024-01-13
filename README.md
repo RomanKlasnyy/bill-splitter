@@ -4,3 +4,4 @@ Simple bill splitter that gives a price per person at a dinner/party. You can al
 ## Supported languages:
 - Python
 - Java
+- Go
