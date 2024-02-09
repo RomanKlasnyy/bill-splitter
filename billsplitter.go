@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	rand.Seed(time.Now().UnixNano())
+	rand.NewSource(time.Now().UnixNano())
 
 	friends := make(map[string]float64)
 	luckyFeature := false
